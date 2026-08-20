@@ -7,19 +7,7 @@ assinado com certificado digital A1, autenticação por mTLS).
 Porte do SDK oficial em PHP ([`nfse-nacional/nfse-php`](https://github.com/nfse-nacional/nfse-php)) —
 mesma estrutura, mesmos DTOs, mesmas regras de negócio.
 
-> Status: **emissão de NFS-e verificada com sucesso contra a Sefin de homologação real** (não
-> simulada) — certificado A1 real, CNPJ real, chave de acesso real devolvida pela Sefin. Testes
-> automatizados locais também passam (assinatura, montagem/leitura de XML, geradores). Ainda não
-> testado em produção nem publicado como dependência. Progresso completo, decisões de porte e
-> achados da depuração real (relógio, trust store, regras de negócio) estão em
-> [`TASKS.md`](TASKS.md#etapa-10).
 
-## Por que não tem "API key" nem `client_id`/`client_secret`?
-
-Porque não existe. Diferente de gateways de pagamento com API própria de NFS-e (Celcoin, por
-exemplo), o Sistema Nacional NFS-e do governo **autentica pelo certificado digital A1/A3 via mTLS**
-— o mesmo certificado que a empresa já usa pra assinar NF-e, XML de folha, etc. Não tem cadastro de
-app, não tem token OAuth, não tem sandbox com credencial separada.
 
 ## Pré-requisitos
 
