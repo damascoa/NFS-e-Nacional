@@ -385,9 +385,3 @@ try {
 }
 ```
 
-## Estrutura, progresso e limitações conhecidas
-
-Ver [`TASKS.md`](TASKS.md) — cobre o que foi portado, o que foi verificado com teste automatizado
-(e como), e o que ainda falta (principalmente: teste contra a Sefin real com certificado de
-verdade, `MunicipioService`, geração de DANFSe local — a API oficial de geração é descontinuada em
-01/07/2026 e passa a ser responsabilidade do sistema emissor).
