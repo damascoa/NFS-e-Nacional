@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.nfsenacional</groupId>
+    <artifactId>nfse-nacional-java</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>NFS-e Nacional Java SDK</name>
+    <description>
+        Framework Java para integração com o Sistema Nacional NFS-e (sefin.nfse.gov.br) —
+        porte do SDK oficial em PHP (nfse-nacional/nfse-php). Emissão/consulta/cancelamento de
+        NFS-e via certificado digital A1 (mTLS), sem dependência de nenhum sistema específico.
+    </description>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <lombok.version>1.18.30</lombok.version>
+        <gson.version>2.10.1</gson.version>
+        <okhttp.version>4.12.0</okhttp.version>
+        <junit.version>5.10.2</junit.version>
+        <jasperreports.version>5.6.0</jasperreports.version>
+        <zxing.version>3.5.3</zxing.version>
+    </properties>
+
+    <dependencies>
+        <!-- Geração de getters/setters/builders sem boilerplate -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- JSON de transporte (payload {"dpsXmlGZipB64": "..."} e respostas da Sefin/ADN) -->
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${gson.version}</version>
+        </dependency>
+
+        <!-- Cliente HTTP com suporte a client certificate (mTLS) -->
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>${okhttp.version}</version>
+        </dependency>
+
+        <!-- Assinatura XMLDSig (javax.xml.crypto.dsig) e KeyStore PKCS12 são nativos do JDK,
+             não precisam de dependência extra. -->
+
+        <!-- Geração do DANFSe (PDF) — compila e preenche o .jrxml portado de danfse-php-main.
+             6.20.6 é a última série ainda compatível com Java 8. -->
+        <dependency>
+            <groupId>net.sf.jasperreports</groupId>
+            <artifactId>jasperreports</artifactId>
+            <version>${jasperreports.version}</version>
+        </dependency>
+
+        <!-- Gera o QR Code da chave de acesso como PNG à parte — a versão 5.6.0 do JasperReports
+             (fixada de propósito pra não colidir com a versão que outros sistemas já usam) não
+             tem o componente nativo jr:QRCode (só chegou na 6.0). O jrxml foi adaptado pra receber
+             o QR como imagem comum em vez do componente barcode4j. -->
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>core</artifactId>
+            <version>${zxing.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.zxing</groupId>
+            <artifactId>javase</artifactId>
+            <version>${zxing.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>3.2.5</version>
+            </plugin>
+            <!-- Roda os exemplos executáveis em src/test/java/.../examples (ver README.md).
+                 classpathScope=test é passado na linha de comando de cada exemplo. -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.2.0</version>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
