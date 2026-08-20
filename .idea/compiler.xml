@@ -8,6 +8,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="NFS-e-Nacional" />
+        <module name="nfse-nacional-java" />
       </profile>
     </annotationProcessing>
   </component>
