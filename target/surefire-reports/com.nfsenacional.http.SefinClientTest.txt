@@ -1,4 +1,0 @@
--------------------------------------------------------------------------------
-Test set: com.nfsenacional.http.SefinClientTest
--------------------------------------------------------------------------------
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.928 s -- in com.nfsenacional.http.SefinClientTest
